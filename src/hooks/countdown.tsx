@@ -2,34 +2,45 @@
     @remarks 
     to check the time left in the timer every second
 
-    @param eventTime 
-    the time the timer finishes in minutes
+    @param stage 
+    the time the timer finishes in seconds
 
     @param isCountdownStarted
     boolean value to if the countdown has started yet
 
     @returns
-    the time left in the countdown
+    the time left in the countdown (seconds)
 **/
 
 import { useEffect, useState } from "react";
 
-export default function Countdown(eventTime: number, isCountdownStarted: boolean): number {
-    // yea should have kept eventTime as seconds for reuseability, but minutes seemed easier to implement as a pomodoro
-    const [remainingTime, setRemainingTime] = useState(eventTime * 60);
+const stageMap = [1500, 900, 300]
+
+export default function timerCountdown(stage: number, setStage: Function, isCountdownStarted: boolean): number {
+    const [endTime, setEndTime] = useState(0)
+    const [remainingTime, setRemainingTime] = useState(stage * 1000)
+    
+    useEffect(() => {
+        setEndTime(Date.now() + remainingTime)
+    }, [isCountdownStarted])
 
     useEffect(() => {
-        if (isCountdownStarted) {
-            // if countdown finish just dont run anymore, will add like an event later
-            if (remainingTime <= 0) return;
+        setEndTime(Date.now() + (stage * 1000))
+    }, [stage])
 
-            const countdownInterval = setInterval(() => {
-                setRemainingTime((prevTime) => prevTime - 1);
-            }, 1000)
-    
-            return () => clearInterval(countdownInterval)
-        }
-    }, [isCountdownStarted])
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (isCountdownStarted && (remainingTime > 0)) {
+                setRemainingTime(endTime - Date.now())
+            }
+            if (remainingTime <= 0) {
+                setStage(stageMap[stageMap.indexOf(stage) + 1] || stageMap[0])
+                setRemainingTime(endTime)
+            }
+        }, 0)
+
+        return () => clearInterval(interval)
+    })
 
     return remainingTime;
 }
