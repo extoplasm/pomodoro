@@ -12,21 +12,27 @@
     the time left in the countdown (seconds)
 **/
 
+interface timerStage {
+    setStage: Function,
+    stage: number,
+    stageMap: Array<number>,
+    setStageIndex: Function,
+    stageIndex: number
+}
+
 import { useEffect, useState } from "react";
 
-const stageMap = [1500, 900, 300]
-
-export default function timerCountdown(stage: number, setStage: Function, isCountdownStarted: boolean): number {
+export default function timerCountdown(timerStage: timerStage, isCountdownStarted: boolean): number {
     const [endTime, setEndTime] = useState(0)
-    const [remainingTime, setRemainingTime] = useState(stage * 1000)
+    const [remainingTime, setRemainingTime] = useState(timerStage.stage * 1000)
     
     useEffect(() => {
         setEndTime(Date.now() + remainingTime)
     }, [isCountdownStarted])
 
     useEffect(() => {
-        setEndTime(Date.now() + (stage * 1000))
-    }, [stage])
+        setEndTime(Date.now() + (timerStage.stage * 1000))
+    }, [timerStage.stage])
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -34,7 +40,8 @@ export default function timerCountdown(stage: number, setStage: Function, isCoun
                 setRemainingTime(endTime - Date.now())
             }
             if (remainingTime <= 0) {
-                setStage(stageMap[stageMap.indexOf(stage) + 1] || stageMap[0])
+                timerStage.setStage(timerStage.stageMap[timerStage.stageIndex + 1] || timerStage.stageMap[0])
+                timerStage.setStageIndex(((timerStage.stageIndex + 1) >= timerStage.stageMap.length) ? 0 : timerStage.stageIndex + 1)
                 setRemainingTime(endTime)
             }
         }, 0)

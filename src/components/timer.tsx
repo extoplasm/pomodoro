@@ -1,9 +1,16 @@
 import timerCountdown from '@/hooks/countdown'
 
 interface Props {
-  stage : number,
-  setStage: Function,
+  timerStage: timerStage,
   isCountdownStarted: boolean,
+}
+
+interface timerStage {
+  setStage: Function,
+  stage: number,
+  stageMap: Array<number>,
+  setStageIndex: Function,
+  stageIndex: number
 }
 
 const formatTime = (milliseconds: number): string => {
@@ -17,12 +24,12 @@ const formatTime = (milliseconds: number): string => {
 };
 
 
-export default function Timer({stage, setStage, isCountdownStarted} : Props) {
+export default function Timer({timerStage, isCountdownStarted} : Props) {
 
   return (
     <>
       <div className="text-4xl w-min">
-        {formatTime(timerCountdown(stage, setStage, isCountdownStarted))}
+        {formatTime(timerCountdown(timerStage, isCountdownStarted))}
       </div>
     </>
   )
