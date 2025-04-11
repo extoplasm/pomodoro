@@ -1,7 +1,17 @@
 import Timer from '@/components/timer'
 import { useState } from 'react'
 
-const stageMap = [1500, 900, 1500, 300]
+const stageMap = [1500, 300, 1500, 900]
+
+interface stageNames {
+  [time: number]: string
+}
+
+const stageNames: stageNames = {
+  1500: 'work',
+  900: 'long break',
+  300: 'short break'
+}
 
 function App() {
   const [isCountdownStarted, setCountdownStarted] = useState(false)
@@ -18,7 +28,7 @@ function App() {
 
   return (
     <>
-      <div className="m-auto w-min">
+      <div className="m-auto w-min text-center">
         <Timer 
           timerStage={timerStage}
           isCountdownStarted={isCountdownStarted}
@@ -42,7 +52,7 @@ function App() {
           */
           >ADVANCE</button>
         </div>
-        <div>{stage}</div>
+        <div>{stageNames[stage as keyof stageNames]}</div>
       </div>
     </>
   )
