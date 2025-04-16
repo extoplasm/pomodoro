@@ -1,7 +1,7 @@
 import Timer from '@/components/timer'
 import { useState } from 'react'
 
-const stageMap = [1500, 300, 1500, 900]
+const stageMap = [1500, 300, 1500, 300, 1500, 300, 1500, 900]
 
 interface stageNames {
   [time: number]: string
@@ -28,7 +28,30 @@ function App() {
 
   return (
     <>
-      <div className="m-auto w-min text-center">
+      <div className="m-auto text-center">
+        <div className="grid grid-cols-3 divide-x-2 divide-solid border-2 border-solid rounded-xl">
+          <button className="text-2xl bg-red-300 hover:bg-red-700 disabled:bg-gray-300 rounded-l-xl" 
+          onClick={() => {
+            setStage(stageMap[stageIndex + 1] || stageMap[0])
+            setStageIndex(((stageIndex + 1) >= stageMap.length) ? 0 : stageIndex + 1)
+          }}
+          disabled={!isCountdownStarted}
+          >WORK</button>
+          <button className="text-2xl bg-red-300 px-5 hover:bg-red-700 disabled:bg-gray-300"
+          onClick={() => {
+            setStage(stageMap[stageIndex + 1] || stageMap[0])
+            setStageIndex(((stageIndex + 1) >= stageMap.length) ? 0 : stageIndex + 1)
+          }}
+          disabled={!isCountdownStarted}
+          >SHORT BREAK</button>
+          <button className="text-2xl bg-red-300 px-5 hover:bg-red-700 disabled:bg-gray-300 rounded-r-xl"
+          onClick={() => {
+            setStage(stageMap[stageIndex + 1] || stageMap[0])
+            setStageIndex(((stageIndex + 1) >= stageMap.length) ? 0 : stageIndex + 1)
+          }}
+          disabled={!isCountdownStarted}
+          >LONG BREAK</button>
+        </div>
         <Timer 
           timerStage={timerStage}
           isCountdownStarted={isCountdownStarted}
@@ -39,7 +62,7 @@ function App() {
           }}>
             {isCountdownStarted ? 'PAUSE' : 'START'}
           </button>
-          <button className="text-2xl bg-red-300 flex mx-3 px-5 rounded-md hover:bg-red-700 disabled:bg-gray-300" 
+          <button className="text-2xl bg-red-300 mx-3 px-5 rounded-md hover:bg-red-700 disabled:bg-gray-300" 
           onClick={() => {
             setStage(stageMap[stageIndex + 1] || stageMap[0])
             setStageIndex(((stageIndex + 1) >= stageMap.length) ? 0 : stageIndex + 1)

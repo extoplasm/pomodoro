@@ -28,7 +28,7 @@ export default function Timer({timerStage, isCountdownStarted} : Props) {
 
   return (
     <>
-      <div className="text-4xl text-center">
+      <div className="text-5xl text-center m-20">
         {formatTime(timerCountdown(timerStage, isCountdownStarted))}
       </div>
     </>
