@@ -30,6 +30,12 @@ export default function Timer({timerStage, isCountdownStarted} : Props) {
     <>
       <div className="text-5xl text-center m-20">
         {formatTime(timerCountdown(timerStage, isCountdownStarted))}
+        <div style={{
+          width: `${(Math.round(timerCountdown(timerStage, isCountdownStarted) / (timerStage.stage * 1000) * 1000) / 10)}%`,
+          backgroundColor: 'black',
+          height: '2px'
+        }}>
+        </div>
       </div>
     </>
   )
