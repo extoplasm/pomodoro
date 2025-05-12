@@ -39,13 +39,12 @@ export default function timerCountdown(timerStage: timerStage, isCountdownStarte
             if (isCountdownStarted && (remainingTime > 0)) {
                 setRemainingTime(endTime - Date.now())
             }
-            if (remainingTime <= 0) {
+            else if (isCountdownStarted) {
                 timerStage.setStage(timerStage.stageMap[timerStage.stageIndex + 1] || timerStage.stageMap[0])
                 timerStage.setStageIndex(((timerStage.stageIndex + 1) >= timerStage.stageMap.length) ? 0 : timerStage.stageIndex + 1)
                 setRemainingTime(endTime)
             }
-        }, 0)
-
+        }, 1)
         return () => clearInterval(interval)
     })
 

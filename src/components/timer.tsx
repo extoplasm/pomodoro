@@ -14,6 +14,7 @@ interface timerStage {
 }
 
 const formatTime = (milliseconds: number): string => {
+  if (milliseconds <= 0 || milliseconds > 1500000) return '0';
   const seconds = Math.floor(milliseconds / 1000);
   const remainingMilliseconds = milliseconds % 1000; 
   
@@ -25,13 +26,15 @@ const formatTime = (milliseconds: number): string => {
 
 
 export default function Timer({timerStage, isCountdownStarted} : Props) {
-  document.title = 'Pomodoro Timer - ' + formatTime(timerCountdown(timerStage, isCountdownStarted))
+  const timer = timerCountdown(timerStage, isCountdownStarted)
+
+  document.title = 'Pomodoro Timer - ' + formatTime(timer)
   return (
     <>
       <div className="text-5xl text-center m-20">
-        {formatTime(timerCountdown(timerStage, isCountdownStarted))}
+        {formatTime(timer)}
         <div style={{
-          width: `${(Math.round(timerCountdown(timerStage, isCountdownStarted) / (timerStage.stage * 1000) * 1000) / 10)}%`,
+          width: `${((timer <=0 || timer > 1500000) ? 0 : Math.round(timer / (timerStage.stage * 1000) * 1000) / 10)}%`,
           backgroundColor: 'black',
           height: '2px'
         }}>
