@@ -25,7 +25,7 @@ const formatTime = (milliseconds: number): string => {
 
 
 export default function Timer({timerStage, isCountdownStarted} : Props) {
-
+  document.title = 'Pomodoro Timer - ' + formatTime(timerCountdown(timerStage, isCountdownStarted))
   return (
     <>
       <div className="text-5xl text-center m-20">
