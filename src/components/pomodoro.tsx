@@ -1,7 +1,7 @@
 import Timer from '@/components/timer'
 import { useState } from 'react'
 
-const stageMap = [1500, 3, 1500, 300, 1500, 300, 1500, 900]
+const stageMap = [1500, 300, 1500, 300, 1500, 300, 1500, 900]
 
 export default function Pomodoro() {
   const [isCountdownStarted, setCountdownStarted] = useState(false)
