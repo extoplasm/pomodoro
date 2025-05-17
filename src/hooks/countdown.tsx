@@ -29,7 +29,7 @@ export default function timerCountdown(timerStage: timerStage, isCountdownStarte
     
     useEffect(() => {
         setEndTime(Date.now() + remainingTime)
-    }, [isCountdownStarted])
+    }, [isCountdownStarted]) // when countdown not started, endtime pushed back
 
     useEffect(() => {
         setEndTime(Date.now() + (timerStage.stage * 1000))
@@ -38,7 +38,7 @@ export default function timerCountdown(timerStage: timerStage, isCountdownStarte
     useEffect(() => {
         const interval = setInterval(() => {
             if (isCountdownStarted && (remainingTime > 0)) {
-                setRemainingTime(endTime - Date.now())
+                setRemainingTime(endTime - Date.now()) // subtract from remaining time to get current remaining time
             }
             else if (isCountdownStarted) {
                 timerStage.finishBell.play()

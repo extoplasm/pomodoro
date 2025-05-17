@@ -34,7 +34,8 @@ export default function Timer({timerStage, isCountdownStarted} : Props) {
       <div className="text-5xl text-center m-20">
         {formatTime(timer)}
         <div style={{
-          width: `${(((Math.round(timer / (timerStage.stage * 1000) * 1000) / 10) > 100) ? 0 : Math.round(timer / (timerStage.stage * 1000) * 1000) / 10)}%`,
+          // check if it is over 100%, otherwise displays the correct percentage
+          width: `${(((Math.round(timer / (timerStage.stage * 1000) * 1000) / 10) > 100) ? 0 : Math.round(timer / (timerStage.stage * 1000) * 1000) / 10)}%`, 
           backgroundColor: 'black',
           height: '2px'
         }}>

@@ -8,7 +8,7 @@ export default function Pomodoro() {
   const [isCountdownStarted, setCountdownStarted] = useState(false)
   const [stageIndex, setStageIndex] = useState(0)
   const [stage, setStage] = useState(stageMap[0])
-  const finishBell = new Audio(bellSound)
+  const finishBell = new Audio(bellSound) // might move this into timer
 
   const timerStage = {
     setStage: setStage,
