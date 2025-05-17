@@ -40,9 +40,11 @@ export default function timerCountdown(timerStage: timerStage, isCountdownStarte
                 setRemainingTime(endTime - Date.now())
             }
             else if (isCountdownStarted) {
-                timerStage.setStage(timerStage.stageMap[timerStage.stageIndex + 1] || timerStage.stageMap[0])
-                timerStage.setStageIndex(((timerStage.stageIndex + 1) >= timerStage.stageMap.length) ? 0 : timerStage.stageIndex + 1)
-                setRemainingTime(endTime)
+                if (confirm("timer finished")) {
+                    timerStage.setStage(timerStage.stageMap[timerStage.stageIndex + 1] || timerStage.stageMap[0])
+                    timerStage.setStageIndex(((timerStage.stageIndex + 1) >= timerStage.stageMap.length) ? 0 : timerStage.stageIndex + 1)
+                    setRemainingTime(endTime)
+                }
             }
         }, 1)
         return () => clearInterval(interval)
