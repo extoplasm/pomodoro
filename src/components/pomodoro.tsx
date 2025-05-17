@@ -2,7 +2,7 @@ import Timer from '@/components/timer'
 import bellSound from '@/assets/bell.mp3'
 import { useState } from 'react'
 
-const stageMap = [1, 3, 1, 300, 1500, 300, 1500, 900]
+const stageMap = [1500, 300, 1500, 300, 1500, 300, 1500, 900]
 
 export default function Pomodoro() {
   const [isCountdownStarted, setCountdownStarted] = useState(false)
