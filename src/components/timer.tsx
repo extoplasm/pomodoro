@@ -10,7 +10,8 @@ interface timerStage {
   stage: number,
   stageMap: Array<number>,
   setStageIndex: Function,
-  stageIndex: number
+  stageIndex: number,
+  finishBell: HTMLAudioElement
 }
 
 const formatTime = (milliseconds: number): string => {

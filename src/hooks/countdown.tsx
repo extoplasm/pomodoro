@@ -17,7 +17,8 @@ interface timerStage {
     stage: number,
     stageMap: Array<number>,
     setStageIndex: Function,
-    stageIndex: number
+    stageIndex: number,
+    finishBell: HTMLAudioElement
 }
 
 import { useEffect, useState } from "react";
@@ -40,6 +41,7 @@ export default function timerCountdown(timerStage: timerStage, isCountdownStarte
                 setRemainingTime(endTime - Date.now())
             }
             else if (isCountdownStarted) {
+                timerStage.finishBell.play()
                 if (confirm("timer finished")) {
                     timerStage.setStage(timerStage.stageMap[timerStage.stageIndex + 1] || timerStage.stageMap[0])
                     timerStage.setStageIndex(((timerStage.stageIndex + 1) >= timerStage.stageMap.length) ? 0 : timerStage.stageIndex + 1)

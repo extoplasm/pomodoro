@@ -1,4 +1,5 @@
 import Timer from '@/components/timer'
+import bellSound from '@/assets/bell.mp3'
 import { useState } from 'react'
 
 const stageMap = [1, 3, 1, 300, 1500, 300, 1500, 900]
@@ -7,6 +8,7 @@ export default function Pomodoro() {
   const [isCountdownStarted, setCountdownStarted] = useState(false)
   const [stageIndex, setStageIndex] = useState(0)
   const [stage, setStage] = useState(stageMap[0])
+  const finishBell = new Audio(bellSound)
 
   const timerStage = {
     setStage: setStage,
@@ -14,6 +16,7 @@ export default function Pomodoro() {
     stageMap: stageMap,
     setStageIndex: setStageIndex,
     stageIndex: stageIndex,
+    finishBell: finishBell,
   }
 
   return (
